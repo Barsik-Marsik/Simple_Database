@@ -35,3 +35,4 @@
 .settings/language.settings.xml
 .settings/org.eclipse.cdt.managedbuilder.core.prefs
 template/project_template.cpp
+/Debug/

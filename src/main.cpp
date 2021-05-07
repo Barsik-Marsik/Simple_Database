@@ -1,7 +1,7 @@
 //============================================================================
-// Name        : White_Final.cpp
+// Name        : Simple_Database
 // Author      : barsik.marsik.11@gmail.com
-// Version     :
+// Version     : v1.white_final
 // Copyright   :
 // Description :
 //============================================================================
@@ -56,6 +56,31 @@ ostream& operator<<(ostream& stream, const Date& date) {
 			setw(2) << setfill('0') << date.GetDay();
 	return stream;
 }
+
+Date ParseDate (const string& date) {
+	istringstream date_stream(date);
+	bool ok = true;
+
+	int year;
+	ok = ok && (date_stream >> year);
+	ok = ok && (date_stream.peek() == '-');
+	date_stream.ignore(1);
+
+	int month;
+	ok = ok && (date_stream >> month);
+	ok = ok && (date_stream.peek() == '-');
+	date_stream.ignore(1);
+
+	int day;
+	ok = ok && (date_stream >> day);
+	ok = ok && date_stream.eof();
+
+	if (!ok) {
+		throw logic_error("Wrong date format: " + date);
+	}
+	return Date(year, month, day);
+}
+
 class Database {
 public:
 	void AddEvent(const Date& date, const string& event) {
@@ -95,36 +120,13 @@ public:
 private:
 	map<Date, set<string>> Storage;
 };
-Date ParseDate (const string& date) {
-	istringstream date_stream(date);
-	bool ok = true;
-
-	int year;
-	ok = ok && (date_stream >> year);
-	ok = ok && (date_stream.peek() == '-');
-	date_stream.ignore(1);
-
-	int month;
-	ok = ok && (date_stream >> month);
-	ok = ok && (date_stream.peek() == '-');
-	date_stream.ignore(1);
-
-	int day;
-	ok = ok && (date_stream >> day);
-	ok = ok && date_stream.eof();
-
-	if (!ok) {
-		throw logic_error("Wrong date format: " + date);
-	}
-	return Date(year, month, day);
-}
 
 int main() {
 	try {
 		Database db;
 		string command_line;
 		while (getline(cin, command_line)) {
-			// —читайте команды с потока ввода и обработайте каждую
+			// —читать команды с потока ввода и обработать каждую
 			stringstream ss(command_line);
 			string command;
 			ss >> command;
