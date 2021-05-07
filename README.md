@@ -1,4 +1,4 @@
-# White_Final
+# Yellow_Final
 Simple database. This is final project of the course "Basic Cpp Development. Yellow belt."
 
 	Простая база данных, которая общается с пользователем через стандартный ввод и вывод. Хранит данные в виде пары: дата, событие.
